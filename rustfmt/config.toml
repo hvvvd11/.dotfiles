@@ -1,0 +1,4 @@
+edition = "2021" # without this fucking line rustfmt would think that it is 2015
+
+tab_spaces = 2
+max_width = 140
