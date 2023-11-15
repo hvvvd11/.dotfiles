@@ -5,7 +5,13 @@ local options = {
   server = {
     on_attach = on_attach,
     capabilities = capabilities,
-  }
+
+  },
+  tools = {
+    inlay_hints = {
+      auto = false
+    },
+  },
 }
 
 return options

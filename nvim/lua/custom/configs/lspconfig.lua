@@ -7,8 +7,8 @@ local on_attach = function(client, bufnr)
   require("plugins.configs.lspconfig").on_attach(client)
 end
 
---GOLANG
 
+--GOLANG
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,

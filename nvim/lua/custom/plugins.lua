@@ -76,13 +76,6 @@ local plugins = {
 
     -- RUST 
   {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end,
-  },
-  {
     "rust-lang/rust.vim",
     ft = "rust",
     init = function ()
