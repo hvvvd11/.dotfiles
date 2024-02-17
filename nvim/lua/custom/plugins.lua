@@ -1,5 +1,9 @@
 local plugins = {
   {
+    "dart-lang/dart-vim-plugin",
+  },
+
+  {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
