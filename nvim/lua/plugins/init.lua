@@ -1,9 +1,5 @@
--- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
--- List of all default plugins & their definitions
 local default_plugins = {
-
   "nvim-lua/plenary.nvim",
-
   {
     "NvChad/base46",
     branch = "v2.0",
@@ -196,12 +192,12 @@ local default_plugins = {
   {
     "numToStr/Comment.nvim",
     keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
-      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
     },
     init = function()
       require("core.utils").load_mappings "comment"

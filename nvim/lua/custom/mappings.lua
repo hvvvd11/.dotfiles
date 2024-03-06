@@ -1,13 +1,21 @@
 local M = {}
 
+M.copilot = {
+  plugin = true,
+  n = {
+    ["<leader>ce"] = { "<cmd> Copilot enable <CR>", "Enable Copilot" },
+    ["<leader>cd"] = { "<cmd> Copilot disable <CR>", "Disable Copilot" },
+  }
+}
+
 M.nvterm = {
   plugin = true,
 
   n = {
     -- FUCKING REBINDING OF FUCKING TERMINAL THAT COULD NOT BE CLOSED
-    ["<leader>h"] = {""},
+    ["<leader>h"] = { "" },
 
-    ["<leader>v"] = {""},
+    ["<leader>v"] = { "" },
   }
 }
 
@@ -20,7 +28,7 @@ M.dap = {
       "Add breakpoint at line"
     },
     ["<leader>dus"] = {
-      function ()
+      function()
         local widgets = require('dap.ui.widgets');
         local sidebar = widgets.sidebar(widgets.scopes);
         sidebar.open();
@@ -69,23 +77,24 @@ M.nvimtree = {
     -- toggle
     ["<leader>1"] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
     -- focus
-    ["<leader>e"] = {""},
+    ["<leader>e"] = { "" },
   },
 }
 
 M.nvterm = {
   plugin = true,
   n = {
-      ["<leader>v"] = {""},
+    ["<leader>v"] = { "" },
   }
 }
 
 M.lspconfig = {
   plugin = true,
   n = {
-    ["<leader>e"] = {"<cmd>lua vim.diagnostic.open_float()<CR>"}
+    ["<leader>e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>" }
   },
 }
+
 
 vim.api.nvim_set_keymap('n', '<S-j>', '<Nop>', { noremap = true, silent = true })
 

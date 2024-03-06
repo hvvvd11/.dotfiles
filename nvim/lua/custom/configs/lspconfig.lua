@@ -81,7 +81,7 @@ lspconfig.html.setup {
 
 lspconfig.tsserver.setup {
   on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx", },
   cmd = { "typescript-language-server", "--stdio" }
 }
 

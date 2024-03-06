@@ -1,8 +1,16 @@
 local plugins = {
   {
+    "github/copilot.vim",
+    lazy = false,
+    config = function()
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+      vim.g.copilot_tab_fallback = ""
+    end
+  },
+  {
     "dart-lang/dart-vim-plugin",
   },
-
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
@@ -28,10 +36,10 @@ local plugins = {
     end,
   },
 
-  -- DEBUG 
+  -- DEBUG
   {
     "rcarriga/nvim-dap-ui",
-    requires = {"mfussenegger/nvim-dap"}
+    requires = { "mfussenegger/nvim-dap" }
   },
   -- GO
   {
@@ -75,14 +83,14 @@ local plugins = {
     end,
   },
 
-    -- Haskell
-  {'mrcjkb/haskell-tools.nvim'},
+  -- Haskell
+  { 'mrcjkb/haskell-tools.nvim' },
 
-    -- RUST 
+  -- RUST
   {
     "rust-lang/rust.vim",
     ft = "rust",
-    init = function ()
+    init = function()
       vim.g.rustfmt_autosave = 1
     end
   },
@@ -90,7 +98,7 @@ local plugins = {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
-    opts = function ()
+    opts = function()
       return require "custom.configs.rust-tools"
     end,
     config = function(_, opts)
@@ -99,8 +107,8 @@ local plugins = {
   },
   {
     'saecki/crates.nvim',
-    ft = {"rust", "toml"},
-    config = function(_,opts)
+    ft = { "rust", "toml" },
+    config = function(_, opts)
       local crates = require('crates')
       crates.setup(opts)
       crates.show()
@@ -110,11 +118,11 @@ local plugins = {
     "hrsh7th/nvim-cmp",
     opts = function()
       local M = require "plugins.configs.cmp"
-      table.insert(M.sources, {name = "crates"})
+      table.insert(M.sources, { name = "crates" })
       return M
     end,
   },
 
-  -- RUST END 
+  -- RUST END
 }
 return plugins
