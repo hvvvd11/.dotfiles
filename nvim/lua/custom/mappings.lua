@@ -88,14 +88,6 @@ M.nvterm = {
   }
 }
 
-M.lspconfig = {
-  plugin = true,
-  n = {
-    ["<leader>e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>" }
-  },
-}
-
-
 vim.api.nvim_set_keymap('n', '<S-j>', '<Nop>', { noremap = true, silent = true })
 
 return M

@@ -130,14 +130,14 @@ M.lspconfig = {
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
-    ["gD"] = {
+    ["<leader>lD"] = {
       function()
         vim.lsp.buf.declaration()
       end,
       "LSP declaration",
     },
 
-    ["gd"] = {
+    ["<leader>ld"] = {
       function()
         vim.lsp.buf.definition()
       end,
@@ -151,7 +151,7 @@ M.lspconfig = {
       "LSP hover",
     },
 
-    ["gi"] = {
+    ["<leader>li"] = {
       function()
         vim.lsp.buf.implementation()
       end,
@@ -165,14 +165,14 @@ M.lspconfig = {
       "LSP signature help",
     },
 
-    ["<leader>D"] = {
+    ["<leader>lT"] = {
       function()
         vim.lsp.buf.type_definition()
       end,
       "LSP definition type",
     },
 
-    ["<leader>ra"] = {
+    ["<leader>2"] = {
       function()
         require("nvchad.renamer").open()
       end,
@@ -186,7 +186,7 @@ M.lspconfig = {
       "LSP code action",
     },
 
-    ["gr"] = {
+    ["<leader>lr"] = {
       function()
         vim.lsp.buf.references()
       end,
