@@ -9,105 +9,124 @@ local util = require "lspconfig/util"
 --GOLANG
 lspconfig.gopls.setup {
 
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "gopls" },
-  filetypes = { "go", "gomod", "gowork", "gotmpl" },
-  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      completeUnimported = true,
-      analyses = {
-        unusedparams = true,
-      }
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            analyses = {
+                unusedparams = true,
+            }
+        }
     }
-  }
 }
 
 -- DART
 lspconfig.dartls.setup {
-  capabilities = capabilities,
-  cmd = {
-    "dart",
-    "language-server",
-    "--protocol=lsp",
-    -- "--port=8123",
-    -- "--instrumentation-log-file=/Users/robertbrunhage/Desktop/lsp-log.txt",
-  },
-  filetypes = { "dart" },
-  init_options = {
-    onlyAnalyzeProjectsWithOpenFiles = false,
-    suggestFromUnimportedLibraries = true,
-    closingLabels = true,
-    outline = false,
-    flutterOutline = true,
-  },
-  settings = {
-    dart = {
-      updateImportsOnRename = true,
-      completeFunctionCalls = true,
-      showTodos = true,
-      lineLength = 120,
+    capabilities = capabilities,
+    cmd = {
+        "dart",
+        "language-server",
+        "--protocol=lsp",
+        -- "--port=8123",
+        -- "--instrumentation-log-file=/Users/robertbrunhage/Desktop/lsp-log.txt",
     },
-  },
-  on_attach = on_attach
-  -- Include other configurations as needed
+    filetypes = { "dart" },
+    init_options = {
+        onlyAnalyzeProjectsWithOpenFiles = false,
+        suggestFromUnimportedLibraries = true,
+        closingLabels = true,
+        outline = false,
+        flutterOutline = true,
+    },
+    settings = {
+        dart = {
+            updateImportsOnRename = true,
+            completeFunctionCalls = true,
+            showTodos = true,
+            lineLength = 120,
+        },
+    },
+    on_attach = on_attach
+    -- Include other configurations as needed
 }
 
 -- FRONT END SHIT
 --
 lspconfig.html.setup {
-  filetypes = { "html", "htmldjango" },
-  on_attach = function(client, _)
-    -- Formatting on save
-    if client.server_capabilities.documentFormattingProvider then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = vim.api.nvim_create_augroup("LspAutocommands", { clear = true }),
-        buffer = 0,
-        callback = function()
-          vim.lsp.buf.format({ timeout_ms = 2000 }) -- Use format instead of formatting_syn
+    filetypes = { "html", "htmldjango" },
+    on_attach = function(client, _)
+        if client.server_capabilities.documentFormattingProvider then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("LspAutocommands", { clear = true }),
+                buffer = 0,
+                callback = function()
+                    -- Step 1: LSP format
+                    vim.lsp.buf.format({ timeout_ms = 2000 })
+
+                    -- Step 2: Askama formatter fixes call blocks
+                    require("custom.configs.askama-templates-formatter").format()
+                end
+            })
         end
-      })
-    end
-  end,
-  settings = {
-    html = {
-      validate = {
-        scripts = true, -- Validate JavaScript
-      }
+    end,
+    settings = {
+        html = {
+            validate = {
+                scripts = true,
+            }
+        }
     }
-  }
 }
 
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx", },
-  cmd = { "typescript-language-server", "--stdio" }
-}
 
 lspconfig.eslint.setup({
-  on_attach = function(_, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-  settings = {
-    codeActionOnSave = { enable = true, mode = "all" },
-    format = true,
-  }
+    on_attach = function(_, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+        })
+    end,
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    settings = {
+        codeActionOnSave = { enable = true, mode = "all" },
+        format = true,
+    }
 })
 
 lspconfig.emmet_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  -- filetypes = {"gohtml"}
+    on_attach = on_attach,
+    capabilities = capabilities,
+    -- filetypes = {"gohtml"}
+})
+
+
+lspconfig.tailwindcss.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 lspconfig.cssls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
-lspconfig.sqlls.setup {}
+lspconfig.sqlls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+
+    filetypes = { "python" }
+})
+
+lspconfig.clangd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
